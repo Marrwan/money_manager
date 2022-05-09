@@ -7,6 +7,7 @@ import {Button, Grid, MenuItem, Select, Typography, InputLabel, TextField, FormC
 import {MoneyManagerContext} from '../../../context/context';
 import dateFormat from './dateFormat';
 import Notification from '../../Notification/Notification';
+
 const startState = {
     amount: '',
     category: '',
@@ -15,6 +16,7 @@ const startState = {
 }
 
 const Form = () => {
+  
     const [open, setOpen] = useState(false);
     const {addPost} = useContext(MoneyManagerContext);
     const [formData, setFormData] = useState(startState);
@@ -28,6 +30,8 @@ const Form = () => {
           setFormData(startState);
           setOpen(true);
         }
+      
+        window.location.reload(false);
     }
     
     const { segment } = useSpeechContext();

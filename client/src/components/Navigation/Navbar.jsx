@@ -1,10 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {Toolbar, Typography, AppBar, Button } from '@material-ui/core';
 import useStyles from '../../styles/Navstyle';
 const Navbar = () => {
     const classes = useStyles;
+    const navigate = useNavigate();
     const e = false
+    const handleLogout = () => {
+        sessionStorage.removeItem('token');
+        navigate('/login')
+    }
+    
   return (
     <>
         <AppBar position='fixed'  className={classes.appBar}>
@@ -19,7 +25,8 @@ const Navbar = () => {
                                      Login
                                      </Button>
                                     ) : (
-                                        <Button color='inherit' component={Link} to="/login">
+
+                                        <Button color='inherit' onClick={handleLogout}>
                                         logout
                                       </Button>
                     )}

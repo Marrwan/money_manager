@@ -6,7 +6,7 @@ import { Grid} from '@material-ui/core';
 import {ErrorPanel, PushToTalkButtonContainer, PushToTalkButton } from '@speechly/react-ui';
 const MainPage = () => {
   const classes = useStyles();
-
+  
   return (
     <div>  
      
@@ -15,6 +15,7 @@ const MainPage = () => {
         <Grid item xs={12} sm={3} className={classes.mobile}>
           <Trackers title="Budget" />
         </Grid>
+        
         <Grid  item xs={12} sm={4} className={classes.main}>
           <Controller   />
         </Grid>

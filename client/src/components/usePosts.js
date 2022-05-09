@@ -9,7 +9,7 @@ const usePosts = (title) => {
   const postsType = posts.filter((p) => p.type === title);
   const total = postsType.reduce((acc, currVal) => acc += currVal.amount, 0);
   const categories = title === 'Budget' ? budgetCategories : spendingCategories;
-  console.log({postsType, total, categories});
+  // console.log({postsType, total, categories});
   
   postsType.forEach((p) => {
     const category = categories.find((cat) => cat.type === p.category);
