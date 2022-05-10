@@ -14,9 +14,7 @@ function App() {
       <Navbar />
 			<Routes>
 				<Route element={<RequireAuth />} >
-					
 				<Route path='/' element={<MainPage />} />
-				
 				</Route>
         <Route path='/login' element={<LoginPage />} />
         <Route path='/register' element={<RegisterPage />} />

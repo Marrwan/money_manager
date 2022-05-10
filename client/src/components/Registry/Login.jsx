@@ -6,7 +6,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import useStyles from '../../styles/Loginstyle';
 import { Link } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
-import {Alert } from 'react-bootstrap';
+import Notification from '../Notification/Notification';
 
 
 // import useAuth from '../../hooks/useAuth';
@@ -17,6 +17,7 @@ const Login = () =>{
   // const {setAuth} = useAuth();
     const classes = useStyles();
     const [email, setEmail] = useState('');
+    const [open, setOpen] = useState(false);
     const [password, setPassword] = useState('');
     const [schem , setSchem] = useState('');
     const credentials = {email, password};
@@ -32,22 +33,14 @@ const Login = () =>{
         };
     const handleSubmit = (event) => {
         event.preventDefault();
-        // const data = new FormData(event.currentTarget);
-        // console.log({
-        //   email: data.get('email'),
-        //   password: data.get('password'),
-        // });
-        
         fetch('/login', options)
         .then(data => {
-          // if(!data.ok){
-          //   throw Error(data);
-          // }
           return data.json()
         })
         .then(async (details) => {
          if(details){
            setSchem(details)
+           setOpen(true)
            if (details.hasOwnProperty('data')){
              if(details.data.hasOwnProperty('token')){
                const token = details.data.token;
@@ -57,10 +50,6 @@ const Login = () =>{
            // setAuth({email,token});
            
           }
-        
-       
-    
-
           setInterval(() => {
             
             navigate(from, { replace: true });
@@ -70,25 +59,24 @@ const Login = () =>{
           console.log("E", e);
           if(!e.response){
             setSchem({status: 'danger', message: e.message, info: e});
+            setOpen(true)
           }
           else{
             setSchem({status: 'danger', message: "Login failed"});
+            setOpen(true)
           }
 
         })
       };
-      const variant = schem.status === 'success' ? 'success' : 'danger';
      let message = schem.status === 'success' ? 'Login Successful, redirecting ...' : schem.message;
-        
-        const alert =  schem ? <Alert  variant={variant}>{message}</Alert> : null
-
+   
   return (
     
       <Container component="main" maxWidth="xs" className={classes.container} >
-       
+          <Notification open={open} setOpen={setOpen} message={message} status={schem.status} />
         <Box className={classes.box} textAlign='center'  >
           <br />
-          {alert}
+         
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>

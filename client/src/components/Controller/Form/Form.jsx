@@ -32,6 +32,7 @@ const Form = () => {
         }
       
         window.location.reload(false);
+  
     }
     
     const { segment } = useSpeechContext();
@@ -82,7 +83,7 @@ const Form = () => {
     return (
         <Grid container spacing={2}>
           
-          <Notification open={open} setOpen={setOpen} />
+          <Notification open={open} setOpen={setOpen} message="Post successfully added"/>
             <Grid item xs={12}>
 
                 <Typography align='center' variant='subtitle2' gutterBottom>

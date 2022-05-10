@@ -3,12 +3,11 @@ import useStyles from '../../../styles/Feedstyle';
 import {MoneyOff, Delete } from '@material-ui/icons';
 import {ListItemText, Avatar, ListItemAvatar, List as MUIList, ListItem,IconButton, Slide, ListItemSecondaryAction } from '@material-ui/core';
 import {MoneyManagerContext} from '../../../context/context';
-import {  useNavigate } from 'react-router-dom';
-import {Alert} from 'react-bootstrap'
+import Notification from '../../Notification/Notification';
 
 const Feed = () => {
     const classes = useStyles();
-    const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
     const { posts} = useContext(MoneyManagerContext);
     // const [posts, setPosts] = useState([]);
     const [message, setMessage] = useState('')
@@ -23,6 +22,7 @@ const Feed = () => {
             
           };
         let response = await fetch(`/posts/${id}`, options)
+        setOpen(true)
         const json = await response.json();
         
         if(json.status === 'error'){
@@ -34,29 +34,17 @@ const Feed = () => {
         }
         catch(error){
             
-            navigate('/')
             setMessage(error.message)
             setStatus('error')
             console.log("EError", error.message)
         }
     }
-    // useEffect(async()=>{
-
-    //     fetch('/posts') .then(data => {
-    //         return data.json()
-    //   })
-    //   .then(async (details) => {
-    //      setPosts(details.data.posts);
-    //     })
-    // },[])
-    const variant = status === 'error' ? 'danger' : 'success';
-        
-    const alert =  message ? <Alert  variant={variant}>{message}</Alert> : null
+    
 
   return (
     <MUIList className={classes.list} dense={false}>
-        {alert}
-    {message}
+           <Notification open={open} setOpen={setOpen} message={message}  status={status}/>
+       
             {posts.map((feed) =>(
                 <Slide key={feed._id} mountOnEnter unmountOnExit direction='down' in>
                     <ListItem>

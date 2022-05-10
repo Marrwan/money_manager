@@ -5,7 +5,7 @@ const startState = JSON.parse(localStorage.getItem('posts')) || [];
 export const MoneyManagerContext = createContext(startState);
 
 export const Provider = ({ children }) =>{
-    // const [ dispact] = useReducer(contextReducer, startState);
+    // const [posts, dispact] = useReducer(contextReducer, startState);
     const [posts, setPosts] = useState([])
     useEffect(async()=>{
      fetch('/posts').then(data => {
