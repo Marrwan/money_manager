@@ -64,7 +64,7 @@ const Login = () =>{
         .catch(e => {
           console.log("E", e);
           if(!e.response){
-            setSchem({status: 'danger', message: 'Server is not responding', info: e});
+            setSchem({status: 'danger', message: e.message, info: e});
           }
           else{
             setSchem({status: 'danger', message: "Login failed"});
