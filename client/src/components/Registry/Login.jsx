@@ -46,13 +46,18 @@ const Login = () =>{
           return data.json()
         })
         .then(async (details) => {
-         
-          setSchem(details)
-          const token = details.data.token;
-          // setAuth({email,token});
-         
-          sessionStorage.setItem('token', token);
-          let sess = sessionStorage.getItem('token');
+         if(details){
+           setSchem(details)
+           if (details.hasOwnProperty('data')){
+             if(details.data.hasOwnProperty('token')){
+               const token = details.data.token;
+               sessionStorage.setItem('token', token);
+             }
+           }
+           // setAuth({email,token});
+           
+          }
+        
        
     
 

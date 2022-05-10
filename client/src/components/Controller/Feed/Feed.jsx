@@ -1,9 +1,9 @@
-import React, {useContext, useState, useEffect} from 'react'
+import React, {useContext, useState} from 'react'
 import useStyles from '../../../styles/Feedstyle';
 import {MoneyOff, Delete } from '@material-ui/icons';
 import {ListItemText, Avatar, ListItemAvatar, List as MUIList, ListItem,IconButton, Slide, ListItemSecondaryAction } from '@material-ui/core';
 import {MoneyManagerContext} from '../../../context/context';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import {Alert} from 'react-bootstrap'
 
 const Feed = () => {

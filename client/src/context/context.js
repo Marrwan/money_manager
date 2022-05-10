@@ -1,15 +1,14 @@
-import React, {useReducer, createContext, useEffect, useState} from 'react';
-import contextReducer from './contextReducer';
+import React, { createContext, useEffect, useState} from 'react';
+// import contextReducer from './contextReducer';
 
 const startState = JSON.parse(localStorage.getItem('posts')) || [];
 export const MoneyManagerContext = createContext(startState);
 
 export const Provider = ({ children }) =>{
-    const [ dispact] = useReducer(contextReducer, startState);
+    // const [ dispact] = useReducer(contextReducer, startState);
     const [posts, setPosts] = useState([])
     useEffect(async()=>{
-
-        fetch('/posts') .then(data => {
+     fetch('/posts').then(data => {
             return data.json()
       })
       .then(async (details) => {
@@ -33,6 +32,7 @@ export const Provider = ({ children }) =>{
 
         let response = await fetch('/posts', options);
         let json = await response.json();
+        return json
             
     }
 
