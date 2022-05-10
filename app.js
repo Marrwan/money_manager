@@ -5,7 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-
+const auth = require('./controllers/auth')
 // require('./config/mailchimp');
 var indexRouter = require('./routes/index');
 var mainRouter = require('./routes/post');
@@ -26,6 +26,7 @@ app.set('view engine', 'ejs');
 // Step 1:
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 // Step 2:
+app.get('/verify/:token', auth.verify)
 app.get("*", function (request, response) {
   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
