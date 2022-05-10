@@ -8,7 +8,7 @@
     "heroku-postbuild": "npm run install-client && npm run build",
     "server": "node ./bin/www",
     "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
-    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
+    "start": "node ./bin/www  --prefix client"
 
   },
   "dependencies": {
