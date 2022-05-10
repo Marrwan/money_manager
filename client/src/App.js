@@ -6,7 +6,6 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RequireAuth from './components/RequireAuth';
-import PersistentLogin from './components/PersistentLogin';
 
 
 function App() {
