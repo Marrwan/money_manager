@@ -35,6 +35,7 @@ export const Provider = ({ children }) =>{
     //       sessionStorage.removeItem('reloadCount');
     //     }
     //   },[])
+    getPosts();
     let [posts, dispact] = useReducer(contextReducer, startState);
     posts = startState;
     const deletePost = (id) => dispact({type:'DELETE_POST', payload: id});
