@@ -7,7 +7,6 @@ export const getPosts = async() => {
                 if(data.data.posts) 
        return data.data.posts 
     });
-   console.log(posts);
    localStorage.setItem('posts', JSON.stringify(posts));
    return posts;
 }
@@ -16,9 +15,10 @@ getPosts();
 let startState ;
 let localStoragePost = localStorage.getItem('posts')
 
-if(typeof(localStoragePost) == 'string'){
-    startState = JSON.parse(localStoragePost)
-}else{
+  startState =   JSON.parse(JSON.stringify(localStoragePost));
+    // JSON.parse(localStoragePost)
+
+if(startState == "undefined"){
     startState = [];
 }
 
@@ -37,10 +37,15 @@ export const Provider = ({ children }) =>{
     //   },[])
     getPosts();
     let [posts, dispact] = useReducer(contextReducer, startState);
-    posts = startState;
+    posts = JSON.parse(startState);
+    if(!posts){
+        posts = [];
+    }
     const deletePost = (id) => dispact({type:'DELETE_POST', payload: id});
     const addPost = (post) => dispact({type:'ADD_POST', payload: post})
     console.log("NAJA", posts)
+    console.log("NAJA", typeof(posts))
+    
     const currentBalance = posts.reduce((acc, currVal) => {
         return (currVal.type === 'Spending' ? acc - currVal.amount : acc + currVal.amount)
     }, 0);

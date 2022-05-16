@@ -10,13 +10,13 @@ const contextReducer= async(state, action) =>{
           };
           await fetch(`/posts/${action.payload}`, options).then(res => res.json())
           
-        //   console.log("RES", res)
-        //   if(res.status === "error"){
-        //       alert(res.message)
-        //       throw new Error(res.message);
-        //   }
-         posts = state.filter((e) => e._id !== action.payload)
-         localStorage.setItem('posts', JSON.stringify(posts));
+        // //   console.log("RES", res)
+        // //   if(res.status === "error"){
+        // //       alert(res.message)
+        // //       throw new Error(res.message);
+        // //   }
+        //  posts = state.filter((e) => e._id !== action.payload)
+        //  localStorage.setItem('posts', JSON.stringify(posts));
 
         return posts;
     } else if(action.type === 'ADD_POST'){
