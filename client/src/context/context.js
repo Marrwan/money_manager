@@ -24,7 +24,6 @@ if(typeof(localStoragePost) == 'string'){
 }
 
 export const MoneyManagerContext = createContext(startState);
-
 export const Provider = ({ children }) =>{
    
     // useEffect(()=> {
