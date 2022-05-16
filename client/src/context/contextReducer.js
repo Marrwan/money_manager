@@ -33,7 +33,6 @@ const contextReducer= async(state, action) =>{
          await fetch('/posts', options);
          posts = [action.payload, ...state];
         
-         sessionStorage.setItem('posts', JSON.stringify(posts));
          localStorage.setItem('posts', JSON.stringify(posts));
          window.location.reload(false)
         return posts;

@@ -9,13 +9,12 @@ export const getPosts = async() => {
     });
    console.log(posts);
    localStorage.setItem('posts', JSON.stringify(posts));
-   sessionStorage.setItem('posts', JSON.stringify(posts));
    return posts;
 }
 
 getPosts();
 let startState ;
-let localStoragePost = localStorage.getItem('posts') || sessionStorage.getItem('posts');
+let localStoragePost = localStorage.getItem('posts')
 
 if(typeof(localStoragePost) == 'string'){
     startState = JSON.parse(localStoragePost)
@@ -24,6 +23,7 @@ if(typeof(localStoragePost) == 'string'){
 }
 
 export const MoneyManagerContext = createContext(startState);
+
 export const Provider = ({ children }) =>{
    
     // useEffect(()=> {
