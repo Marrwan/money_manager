@@ -10,6 +10,10 @@ let localToken = localStorage.getItem('user');
 
 
 return (
+    !sessionToken 
+
+    ?  (<Navigate to='/login' state ={{from: location}} replace />) 
+    :
     sessionToken === localToken ? 
     (<Outlet />)
     : 
