@@ -5,7 +5,10 @@ import useStyles from '../../styles/Navstyle';
 const Navbar = () => {
     const classes = useStyles;
     const navigate = useNavigate();
-    const e = false
+    let sessionToken = sessionStorage.getItem('token');
+let localToken = localStorage.getItem('user');
+
+    const e =  sessionToken !== localToken ;
     const handleLogout = () => {
         sessionStorage.removeItem('token');
         localStorage.setItem('user', "loggedout")

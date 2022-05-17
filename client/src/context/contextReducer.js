@@ -35,7 +35,7 @@ const contextReducer= async(state, action) =>{
         //  posts = [action.payload, ...state];
         posts =  await getPosts() || [];
          localStorage.setItem('posts', JSON.stringify(posts));
-         window.location.reload(false)
+         window.location.reload();
         return posts;
     }
     else{
