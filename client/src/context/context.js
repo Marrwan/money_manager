@@ -1,20 +1,27 @@
 import React, {useReducer, createContext, useEffect} from 'react';
 import contextReducer from './contextReducer';
+let credentials = localStorage.getItem('user');
 export const getPosts = async() => {
-   let posts = await fetch('/posts', { headers : {
+   let posts = await fetch(`/posts?token=${credentials}`, 
+   {
+        headers : {
     'Content-Type' : 'application/json',
-  }}).then((res)=>res ? res.json() : null).then(data => {
+  },
+}).then((res)=>res ? res.json() : null).then(data => {
        if( data)
             if( data.data) 
                 if(data.data.posts) 
        return data.data.posts 
     });
+    
     if(posts){
         console.log("fetch", posts);
         localStorage.setItem('posts', JSON.stringify(posts));
         return posts;
     }
 }
+
+
 
 getPosts();
 let startState ;

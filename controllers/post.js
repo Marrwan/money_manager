@@ -9,9 +9,16 @@ const jwt = require('jsonwebtoken');
 
 exports.getAllPosts = async (req, res) => { 
 try {
+   
     // get user from cookies
-    const token = req.cookies.token;
+    const token = req.query.token;
+    var parts = token.split('.');
+
+    if (parts.length !== 3){
+      return  res.status(400).json({ status: "error", message: "Something went wrong" })
+    }
     //  Check is token is valid
+
     const decoded = await jwt.verify(token, process.env.JWT_SECRET);
     // Check if user still exists
     const user = await User.findById(decoded.id);
@@ -27,6 +34,7 @@ try {
     });
 
 } catch (error) {
+    console.log(error)
     res.status(400).json({ status: "error", message: "Something went wrong" })
 }
 }

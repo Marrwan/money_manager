@@ -11,6 +11,7 @@ router.get('/verify/:token', auth.verify)
 
 router.post('/login', auth.login)
 
-router.post('/logout', auth.logout)
+router.post('/logout', auth.logout);
+router.get('/log', auth.isLoggedIn);
 
 module.exports = router;

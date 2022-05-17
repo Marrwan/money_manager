@@ -21,6 +21,26 @@ const cookieOptions = {
     httpOnly: true, //? Cookie can NOT be accessed / modified by browser
   };
 
+  exports.isLoggedIn = async(req,res)=>{
+    // Check if token exists in cookies
+    const token = req.query.token;
+    if (!token) return res.send(false);  // 401 Unauthorized
+    var parts = token.split('.');
+
+if (parts.length !== 3){
+  return res.send(false);
+}
+    //  Check is token is valid
+    const decoded = await jwt.verify(token , process.env.JWT_SECRET);
+    // Check if user still exists
+    const user = await User.findById(decoded.id);
+
+    
+    if (!user) return res.send(false);  // 401 Unauthorized
+//  Check if user is activated
+    if (!user.activated) return res.send(false); // 401 Unauthorized
+    return res.send(true);
+  }
 exports.protect = async (req,res, next) => {
   try{
 // Check if token exists in cookies
