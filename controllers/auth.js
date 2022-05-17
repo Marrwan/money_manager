@@ -130,6 +130,7 @@ exports.login = async (req,res) => {
   
  
     if(!email || !password) return res.status(400).json({  status: 'error', message:'Please enter all fields'});
+    email = email.toLowerCase();
     const user = await User.findOne({email});
 
     if(!user) return res.status(400).json({  status: 'error', message:'User does not exist'});
