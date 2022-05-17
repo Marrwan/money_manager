@@ -152,6 +152,7 @@ exports.login = async (req,res) => {
       },
     });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({ status: 'error', message : "Something went wrong", info : error.message})
   }
 }
