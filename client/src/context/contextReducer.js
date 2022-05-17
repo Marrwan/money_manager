@@ -18,7 +18,7 @@ const contextReducer= async(state, action) =>{
         //   }
         //  posts = state.filter((e) => e._id !== action.payload)
         //  localStorage.setItem('posts', JSON.stringify(posts));
-        posts = await getPosts();
+         posts =  await getPosts() || [];
         return posts;
     } else if(action.type === 'ADD_POST'){
         let credentials = JSON.stringify(action.payload);
@@ -33,7 +33,7 @@ const contextReducer= async(state, action) =>{
          };
          await fetch('/posts', options);
         //  posts = [action.payload, ...state];
-        posts = await getPosts();
+        posts =  await getPosts() || [];
          localStorage.setItem('posts', JSON.stringify(posts));
          window.location.reload(false)
         return posts;

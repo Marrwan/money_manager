@@ -60,6 +60,7 @@ const Login = () =>{
          })
          .catch(e=>{
            setOpen(true)
+           setStatus('error')
            setSchem("Something went wrong");
            console.log(e);
           //  throw new Error(e.message)

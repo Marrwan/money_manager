@@ -1,17 +1,19 @@
 import React, {useReducer, createContext, useEffect} from 'react';
 import contextReducer from './contextReducer';
 export const getPosts = async() => {
-   let posts = await fetch('/posts').then((res)=>res ? res.json() : null).then(data => {
+   let posts = await fetch('/posts', { headers : {
+    'Content-Type' : 'application/json',
+  }}).then((res)=>res ? res.json() : null).then(data => {
        if( data)
             if( data.data) 
                 if(data.data.posts) 
        return data.data.posts 
     });
     if(posts){
-        console.log(posts);
+        console.log("fetch", posts);
         localStorage.setItem('posts', JSON.stringify(posts));
+        return posts;
     }
-    return posts;
 }
 
 getPosts();
@@ -30,7 +32,7 @@ export const MoneyManagerContext = createContext(startState);
 export const Provider = ({ children }) =>{
    
     useEffect(async()=> {
-       let posts =  await getPosts();
+       let posts =  await getPosts() || [];
        localStorage.setItem('posts', JSON.stringify(posts));
       },[])
     let [posts, dispact] = useReducer(contextReducer, startState);
