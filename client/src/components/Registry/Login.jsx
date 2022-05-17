@@ -32,7 +32,7 @@ const Login = () =>{
         };
         fetch('/login', options)
         .then(data =>  data.json())
-        .then((details) => {
+        .then(async(details) => {
           if(details){
             if(details.hasOwnProperty('status')){
               setStatus(details.status);
@@ -48,11 +48,12 @@ const Login = () =>{
                 setSchem('Login success, redirecting ...')
                 localStorage.setItem('user', token);
                 sessionStorage.setItem('token', token);
-                getPosts();
+               let posts = await getPosts();
+                localStorage.setItem('posts', JSON.stringify(posts));
                      setInterval(() => {
              
              navigate(from, { replace: true });
-           }, 3300);
+           }, 3700);
               }
             }
            }

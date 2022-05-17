@@ -1,3 +1,4 @@
+import {getPosts} from './context'
 const contextReducer= async(state, action) =>{
     let posts;
     
@@ -10,14 +11,14 @@ const contextReducer= async(state, action) =>{
           };
           await fetch(`/posts/${action.payload}`, options).then(res => res.json())
           
-        // //   console.log("RES", res)
-        // //   if(res.status === "error"){
-        // //       alert(res.message)
-        // //       throw new Error(res.message);
-        // //   }
+        //   console.log("RES", res)
+        //   if(res.status === "error"){
+        //       alert(res.message)
+        //       throw new Error(res.message);
+        //   }
         //  posts = state.filter((e) => e._id !== action.payload)
         //  localStorage.setItem('posts', JSON.stringify(posts));
-
+        posts = await getPosts();
         return posts;
     } else if(action.type === 'ADD_POST'){
         let credentials = JSON.stringify(action.payload);
@@ -31,8 +32,8 @@ const contextReducer= async(state, action) =>{
 
          };
          await fetch('/posts', options);
-         posts = [action.payload, ...state];
-        
+        //  posts = [action.payload, ...state];
+        posts = await getPosts();
          localStorage.setItem('posts', JSON.stringify(posts));
          window.location.reload(false)
         return posts;
