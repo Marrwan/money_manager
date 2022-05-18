@@ -4,7 +4,7 @@ import {v4 as uuidv4 } from 'uuid';
 import { budgetCategories, spendingCategories } from '../../categories';
 import { useSpeechContext } from '@speechly/react-client';
 import {Button, Grid, MenuItem, Select, Typography, InputLabel, TextField, FormControl} from '@material-ui/core';
-import {MoneyManagerContext} from '../../../context/context';
+import {MoneyManagerContext,getPosts} from '../../../context/context';
 import dateFormat from './dateFormat';
 import Notification from '../../Notification/Notification';
 const startState = {
@@ -32,6 +32,7 @@ const Form = () => {
     
     const { segment } = useSpeechContext();
     useEffect(() =>{
+      getPosts()
         if(segment){
         if(segment.intent.intent === 'add_spending')
         {

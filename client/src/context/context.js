@@ -13,9 +13,10 @@ export const getPosts = async() => {
                 if(data.data.posts) 
        return data.data.posts 
     });
-    
+
     if(posts){
         console.log("fetch", posts);
+       
         localStorage.setItem('posts', JSON.stringify(posts));
         return posts;
     }

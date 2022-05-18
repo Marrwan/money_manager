@@ -6,6 +6,7 @@ import {MoneyManagerContext, getPosts} from '../../../context/context';
 import Notification from '../../Notification/Notification';
 
 const Feed = () => {
+    
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const {deletePost, posts} = useContext(MoneyManagerContext);

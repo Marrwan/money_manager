@@ -25,7 +25,7 @@ try {
     // get all posts of user
     const posts = await Post.find({ author: user._id }).populate('author');
     // const posts = await Post.find({}).populate('author');
-  
+//   localStorage.setItem('posts', JSON.stringify(posts));
     res.status(200).json({  
         status: 'success',
         data: {
@@ -120,6 +120,7 @@ exports.createPost = async (req,res) => {
 
         
     } catch (error) {
+        
         res.status(400).json({ status: "error", message: "Something went wrong"});
     }
 }
