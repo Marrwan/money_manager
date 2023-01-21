@@ -10,6 +10,7 @@ const auth = require('./controllers/auth');
 const post = require('./controllers/post');
 
 
+
 // require('./config/mailchimp');
 var indexRouter = require('./routes/index');
 var mainRouter = require('./routes/post');
